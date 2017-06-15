@@ -1,0 +1,320 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: VPC with 2 private and public subnets and NAT Gateway
+
+Parameters:
+  Project:
+    Type: String
+  Environment:
+    Type: String
+  VpcCidrBlock:
+    Type: String
+    Default: 10.0.0.0/16
+  PublicSubnetCidrBlockZoneA:
+    Type: String
+    Default: 10.0.0.0/24
+  PublicSubnetCidrBlockZoneB:
+    Type: String
+    Default: 10.0.1.0/24
+  AppSubnetCidrBlockZoneA:
+    Type: String
+    Default: 10.0.2.0/24
+  AppSubnetCidrBlockZoneB:
+    Type: String
+    Default: 10.0.3.0/24
+  CreateNatGateway:
+    Type: String
+    Default: false
+    AllowedValues: 
+      - true
+      - false
+
+Conditions:
+  CreateNatGateway: !Equals [!Ref CreateNatGateway, true]
+    
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidrBlock
+      InstanceTenancy: default
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}
+        -
+          Key: Project
+          Value: !Ref Project
+          
+  VpcLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub ${Project}.${Environment}.Vpc
+      RetentionInDays: 30
+      
+  VpcFlowLog:
+    Type: AWS::EC2::FlowLog
+    Properties:
+      DeliverLogsPermissionArn: !GetAtt VpcFlowLogRole.Arn
+      LogGroupName: !Sub ${Project}.${Environment}.Vpc
+      ResourceId: !Ref Vpc
+      ResourceType: VPC
+      TrafficType: ALL
+        
+  VpcFlowLogRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service: 
+                - ec2.amazonaws.com
+            Action: 
+              - sts:AssumeRole
+      
+  VpcFlowLogPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub ${Project}.${Environment}.VpcFlowLogDelivery
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: Allow
+            Resource: !Sub arn:aws:logs:*:*:log-group:${Project}.${Environment}.Vpc:log-stream:*
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:DeleteLogStream
+              - logs:DescribeLogGroups
+              - logs:PutLogEvents
+      Roles:
+        - !Ref VpcFlowLogRole
+  
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}
+        -
+          Key: Project
+          Value: !Ref Project
+          
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref InternetGateway
+  
+  NetworkAcl:
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+      VpcId: !Ref Vpc
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}
+        -
+          Key: Project
+          Value: !Ref Project
+      
+  NetworkAclIngressAllOpen:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      CidrBlock: 0.0.0.0/0
+      Protocol: -1
+      RuleAction: allow
+      RuleNumber: 100
+      NetworkAclId: !Ref NetworkAcl
+  
+  NetworkAclEgressAllOpen:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      CidrBlock: 0.0.0.0/0
+      Egress: true
+      Protocol: -1
+      RuleAction: allow
+      RuleNumber: 100
+      NetworkAclId: !Ref NetworkAcl
+      
+  PublicSubnetZoneA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PublicSubnetCidrBlockZoneA
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      VpcId: !Ref Vpc
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}.PublicZoneA
+        -
+          Key: Project
+          Value: !Ref Project
+      
+  PublicSubnetZoneB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PublicSubnetCidrBlockZoneB
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      VpcId: !Ref Vpc
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}.PublicZoneB
+        -
+          Key: Project
+          Value: !Ref Project
+      
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}.Public
+        -
+          Key: Project
+          Value: !Ref Project
+          
+  RouteTableSubnetAssociationPublicSubnetZoneA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnetZoneA
+      
+  RouteTableSubnetAssociationPublicSubnetZoneB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnetZoneB
+          
+  RouteToInternetGateway:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      RouteTableId: !Ref PublicRouteTable
+      GatewayId: !Ref InternetGateway
+          
+  NatGatewayIpZoneA:
+    Type: AWS::EC2::EIP
+    Condition: CreateNatGateway
+    Properties:
+      Domain: vpc
+      
+  NatGatewayZoneA:
+    Type: AWS::EC2::NatGateway
+    Condition: CreateNatGateway
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      AllocationId: !GetAtt NatGatewayIpZoneA.AllocationId
+      SubnetId: !Ref PublicSubnetZoneA
+      
+  NatGatewayIpZoneB:
+    Type: AWS::EC2::EIP
+    Condition: CreateNatGateway
+    Properties:
+      Domain: vpc
+      
+  NatGatewayZoneB:
+    Type: AWS::EC2::NatGateway
+    Condition: CreateNatGateway
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      AllocationId: !GetAtt NatGatewayIpZoneB.AllocationId
+      SubnetId: !Ref PublicSubnetZoneB
+      
+  AppSubnetZoneA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref AppSubnetCidrBlockZoneA
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      VpcId: !Ref Vpc
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}.AppZoneA
+        -
+          Key: Project
+          Value: !Ref Project
+      
+  AppSubnetZoneB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref AppSubnetCidrBlockZoneB
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      VpcId: !Ref Vpc
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}.AppZoneB
+        -
+          Key: Project
+          Value: !Ref Project
+      
+  AppRouteTableZoneA:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}.AppZoneA
+        -
+          Key: Project
+          Value: !Ref Project
+          
+  AppRouteTableZoneB:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}.AppZoneB
+        -
+          Key: Project
+          Value: !Ref Project
+          
+  RouteTableSubnetAssociationAppSubnetZoneA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref AppRouteTableZoneA
+      SubnetId: !Ref AppSubnetZoneA
+      
+  RouteTableSubnetAssociationAppSubnetZoneB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref AppRouteTableZoneB
+      SubnetId: !Ref AppSubnetZoneB
+
+  RouteToNatGatewayZoneA:
+    Type: AWS::EC2::Route
+    Condition: CreateNatGateway
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      RouteTableId: !Ref AppRouteTableZoneA
+      NatGatewayId: !Ref NatGatewayZoneA
+      
+  RouteToNatGatewayZoneB:
+    Type: AWS::EC2::Route
+    Condition: CreateNatGateway
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      RouteTableId: !Ref AppRouteTableZoneB
+      NatGatewayId: !Ref NatGatewayZoneB
+      
+Outputs:
+  VpcId:
+    Value: !Ref Vpc
+    Export:
+      Name: !Sub ${Project}-${Environment}-VpcId
+    
+  
