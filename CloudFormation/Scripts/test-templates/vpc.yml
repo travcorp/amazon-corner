@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: VPC with 2 private and public subnets and NAT Gateway
+
+Parameters:
+  Project:
+    Type: String
+  Environment:
+    Type: String
+  VpcCidrBlock:
+    Type: String
+    Default: 10.0.0.0/16
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidrBlock
+      InstanceTenancy: default
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        -
+          Key: Name
+          Value: !Sub ${Project}.${Environment}
+        -
+          Key: Project
+          Value: !Ref Project
+          

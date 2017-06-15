@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "Project",
+    "ParameterValue": "TestVPC"
+  },
+  {
+    "ParameterKey": "Environment",
+    "ParameterValue": "Dev"
+  }
+]
