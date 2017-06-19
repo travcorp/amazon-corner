@@ -14,7 +14,7 @@ then
   params=''
   echo No stack parameters
 else
-  params='--parameters file://'$stack_parameters
+  params='--parameters '$stack_parameters
   echo Parameter file: $stack_parameters
 fi
 

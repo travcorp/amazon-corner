@@ -15,7 +15,7 @@ profile=ttc-dev \
 stack_template=vpc.yml \
 s3_bucket_name=ttc-releases-aws-dev \
 s3_key=myproject/mystack \
-stack_parameters=params.json \
+stack_parameters=file://params.json \
 ./create-stack.sh
 ```
 ### JSON parameter file example:
