@@ -1,4 +1,6 @@
 #!/bin/bash
+set -exu
+
 s3_key=$s3_key-$(uuidgen)
 stack_template_url=https://$s3_bucket_name.s3.amazonaws.com/$s3_key
 echo Uploading template file: $stack_template --\> $stack_template_url

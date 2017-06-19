@@ -1,4 +1,6 @@
 #!/bin/bash
+set -exu
+
 echo Deleting stack $stack_name
 aws cloudformation delete-stack --stack-name $stack_name --region $region --profile $profile --output text \
   || (>&2 echo FAILURE: Stack $stack_name failed to delete. See the error above! \
