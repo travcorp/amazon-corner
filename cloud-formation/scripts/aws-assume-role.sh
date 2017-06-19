@@ -41,7 +41,7 @@ arn_array=(${role_arn//:/ })
 account_id=${arn_array[3]}
 profile_path=${arn_array[4]}
 profile_name="ephemeral-${account_id}-${profile_path}-`date +%Y%m%d%H%M%S`"
-session_name="${USER}-`hostname`-`date +%Y%m%d`"
+session_name="`hostname`-`date +%Y%m%d`"
 if [ -n "$parent_profile" ]; then
     profile_argument="--profile $parent_profile"
 fi
