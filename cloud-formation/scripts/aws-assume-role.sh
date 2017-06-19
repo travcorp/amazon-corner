@@ -1,5 +1,6 @@
 #!/bin/bash
-set -exu
+set -ex
+set +u
 
 usage () {
   cat <<DOCUMENTATIONXX
@@ -35,17 +36,12 @@ if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
 fi
 
 role_arn=$1
-set +u
 parent_profile=$2
-set -u
 arn_array=(${role_arn//:/ })
 account_id=${arn_array[3]}
 profile_path=${arn_array[4]}
 profile_name="ephemeral-${account_id}-${profile_path}-`date +%Y%m%d%H%M%S`"
-
-set +u
 session_name="${USER}-`hostname`-`date +%Y%m%d`"
-set -u
 if [ -n "$parent_profile" ]; then
     profile_argument="--profile $parent_profile"
 fi
@@ -63,3 +59,4 @@ aws configure set aws_secret_access_key ${sts[1]} --profile ${profile_name}
 aws configure set aws_session_token ${sts[2]} --profile ${profile_name}
 
 echo $profile_name
+set -u
