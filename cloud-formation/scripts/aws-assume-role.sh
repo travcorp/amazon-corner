@@ -35,7 +35,9 @@ if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
 fi
 
 role_arn=$1
+set +u
 parent_profile=$2
+set -u
 arn_array=(${role_arn//:/ })
 account_id=${arn_array[3]}
 profile_path=${arn_array[4]}
