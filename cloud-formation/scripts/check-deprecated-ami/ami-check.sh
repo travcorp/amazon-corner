@@ -1,6 +1,8 @@
 #! /bin/bash
 AWS_PROFILE=`. /aws-assume-role.sh $DEPLOY_ROLE_ARN`
-echo $DEPLOY_ROLE_ARN
+
+echo seting region...
+aws configure set region eu-west-1
 echo fetching available images...
 aws ec2 describe-images --filters "Name=platform, Values=windows" --query 'Images[*].{ID:ImageId}' > all.txt
 
