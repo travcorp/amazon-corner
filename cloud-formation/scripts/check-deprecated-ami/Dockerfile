@@ -3,11 +3,15 @@ FROM ubuntu:16.04
 RUN apt-get update && \
 	apt-get install -y \
 		python3 \
-	&& rm -rf /var/lib/apt/lists/* \
-	curl -O https://bootstrap.pypa.io/get-pip.py \
-	&& python get-pip.py --user \
-	pip install awscli --upgrade --user
+		curl
+RUN python3 --version
+
+RUN curl -O https://bootstrap.pypa.io/get-pip.py
+RUN	python3 get-pip.py
+RUN export PATH=~/usr/bin:$PATH
+RUN	pip install awscli --upgrade
 
 COPY ./ami-check.sh .
+COPY ./aws-assume-role.sh
 
 ENTRYPOINT ["./ami-check.sh"]
