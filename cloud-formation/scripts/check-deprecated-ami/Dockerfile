@@ -12,6 +12,6 @@ RUN export PATH=~/usr/bin:$PATH
 RUN	pip install awscli --upgrade
 
 COPY ./ami-check.sh .
-COPY ./aws-assume-role.sh
+COPY ./aws-assume-role.sh .
 
 ENTRYPOINT ["./ami-check.sh"]
