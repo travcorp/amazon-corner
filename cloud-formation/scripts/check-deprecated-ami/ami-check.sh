@@ -11,6 +11,8 @@ aws ec2 describe-images --filters "Name=platform, Values=windows" --query 'Image
 
 echo fetching images used by running instances...
 aws ec2 describe-instances --query "Reservations[*].Instances[*].[ImageId]" --filters "Name=platform, Values=windows" --output text --profile $AWS_PROFILE > inuse.txt 
+aws ec2 describe-instances --output text --profile $AWS_PROFILE
+echo hi
 cat inuse.txt
 
 echo finding deprecated images...
