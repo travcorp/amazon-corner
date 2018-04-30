@@ -12,6 +12,9 @@ echo checking dir exists ... we are at $PWD
 ls $MOUNTDIR
 echo hello world > $MOUNTDIR/myfile.txt
 
+echo this is what is in work...
+ls -l $MOUNTDIR
+
 
 docker build -t ami-check .
 
