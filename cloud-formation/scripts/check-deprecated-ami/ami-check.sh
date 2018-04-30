@@ -20,4 +20,5 @@ grep -v -f all.txt inuse.txt | sort -u > deprecated.txt
 cat deprecated.txt
 
 echo cleaning up...
-rm all.txt inuse.txt deprecated.txt
+
+ls -l
