@@ -10,7 +10,7 @@ aws ec2 describe-images --filters "Name=platform, Values=windows" --query 'Image
 # cat all.txt
 
 echo fetching images used by running instances...
-aws ec2 describe-instances --query 'Reservations[*].Instances[*].[ImageId, Tags[?Key==`Project`].Value]' --filters "Name=platform, Values=windows" --output text --profile $AWS_PROFILE | paste - - > inuse.txt
+aws ec2 describe-instances --region eu-west-1 --query 'Reservations[*].Instances[*].[ImageId, Tags[?Key==`Project`].Value]' --filters "Name=platform, Values=windows" --output text --profile $AWS_PROFILE | paste - - > inuse.txt
 cat inuse.txt
 
 echo finding deprecated images...
