@@ -7,13 +7,14 @@ agent_name=`echo "$teamcity_agent_name" | tr '[:upper:]' '[:lower:]'`
 MOUNTDIR=/data/teamcity_agents/$agent_name/work/check-deprecated-ami
 
 echo myfile is at $MOUNTDIR 
+echo this is what is in work...
+ls -l $MOUNTDIR
+
+
 
 echo checking dir exists ... we are at $PWD
 ls $MOUNTDIR
 echo hello world > $MOUNTDIR/myfile.txt
-
-echo this is what is in work...
-ls -l $MOUNTDIR
 
 
 docker build -t ami-check .
