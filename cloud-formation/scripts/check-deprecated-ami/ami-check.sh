@@ -19,7 +19,13 @@ echo finding deprecated images...
 grep -v -f all.txt inuse.txt | sort -u > deprecated.txt
 cat deprecated.txt
 
+ls -l
 echo cleaning up...
-touch /build/testfile-`date +%s`.txt
+
+echo changing to build dir
+cd /build
+touch testfile-`date +%s`.txt
 
 ls -l
+
+
