@@ -20,7 +20,7 @@ cat deprecated.txt
 ls -l
 echo finished...
 pwd
-ls -l opt
+ls -l build
 
 echo changing to build dir
 cd /build
