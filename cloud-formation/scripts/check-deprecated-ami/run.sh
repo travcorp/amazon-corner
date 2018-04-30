@@ -8,7 +8,7 @@ MOUNTDIR=/data/teamcity_agents/$agent_name/work/check-deprecated-ami
 
 echo myfile is at $MOUNTDIR 
 echo this is what is in work...
-ls -l /data/teamcity_agents/$agent_name/work/
+# ls -l /data/teamcity_agents/$agent_name/work/
 
 
 
