@@ -24,4 +24,6 @@ pwd
 
 echo changing to build dir
 cd /build
-touch testfile-`date +%s`.txt
+echo hello > testfile.txt
+ls -l
+
