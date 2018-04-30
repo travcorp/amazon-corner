@@ -19,7 +19,6 @@ cat deprecated.txt
 
 ls -l
 echo finished...
-echo you are here:
 pwd
 
 echo changing to build dir
