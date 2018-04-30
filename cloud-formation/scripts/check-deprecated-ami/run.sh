@@ -11,5 +11,5 @@ docker build -t ami-check .
 echo 'running container'
 docker run \
 	-e DEPLOY_ROLE_ARN=$DEPLOY_ROLE_ARN \
-	-v $build_dir:/build \
+	-v /data/teamcity_agents/$agent_name/work/$(basename "$PWD"):/build \
 	ami-check 
