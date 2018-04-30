@@ -13,7 +13,7 @@ echo this is what is in work...
 
 
 echo checking dir exists ... we are at $PWD
-ls $MOUNTDIR
+# ls $MOUNTDIR
 echo hello world > $MOUNTDIR/myfile.txt
 
 
