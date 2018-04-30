@@ -20,5 +20,6 @@ grep -v -f all.txt inuse.txt | sort -u > deprecated.txt
 cat deprecated.txt
 
 echo cleaning up...
+touch /build/testfile-`date +%s`.txt
 
 ls -l
