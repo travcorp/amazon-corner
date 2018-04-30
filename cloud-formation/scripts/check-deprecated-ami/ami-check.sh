@@ -22,4 +22,6 @@ echo cleaning up...
 
 echo changing to build dir
 cd /build
-touch testfile-`date +%s`.txt
+touch testfile.txt
+ls -l
+
