@@ -22,6 +22,6 @@ echo cleaning up...
 
 echo changing to build dir
 cd /build
-touch testfile.txt
+echo hello > testfile.txt
 ls -l
 
