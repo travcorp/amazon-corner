@@ -2,9 +2,14 @@
 set -exu
 
 agent_name=`echo "$teamcity_agent_name" | tr '[:upper:]' '[:lower:]'`
+
+
 MOUNTDIR=/data/teamcity_agents/$agent_name/work/check-deprecated-ami
 
 echo myfile is at $MOUNTDIR 
+
+echo checking dir exists ... we are at $PWD
+ls $MOUNTDIR
 echo hello world > $MOUNTDIR/myfile.txt
 
 
