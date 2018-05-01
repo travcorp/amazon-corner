@@ -1,6 +1,8 @@
 #! /bin/bash
 AWS_PROFILE=`. /aws-assume-role.sh $DEPLOY_ROLE_ARN`
 
+cd build
+
 echo seting region...
 aws configure set region $REGION
 export AWS_DEFAULT_REGION=$REGION
@@ -12,7 +14,7 @@ echo fetching images used by running instances...
 aws ec2 describe-instances --region $REGION --query 'Reservations[*].Instances[*].[ImageId, Tags[?Key==`Project`].Value]' --output text --profile $AWS_PROFILE | paste - - > inuse.txt
 
 echo finding deprecated images...
-grep -v -f all.txt inuse.txt | sort -u > ./build/deprecated.txt
+grep -v -f all.txt inuse.txt | sort -u > deprecated.txt
 
 if [ -s ./build/deprecated.txt ]; then
 	echo DEPRECATED AMIS FOUND
