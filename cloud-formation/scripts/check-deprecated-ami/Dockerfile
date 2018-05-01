@@ -13,7 +13,7 @@ RUN export PATH=~/usr/bin:$PATH
 RUN	pip install awscli --upgrade
 
 COPY ./ami-check.sh .
-ADD https://github.com/travcorp/amazon-corner/blob/master/cloud-formation/scripts/aws-assume-role.sh .
+ADD https://raw.githubusercontent.com/travcorp/amazon-corner/master/cloud-formation/scripts/aws-assume-role.sh
 
 RUN chmod +x ./ami-check.sh 
 RUN chmod +x ./aws-assume-role.sh 
