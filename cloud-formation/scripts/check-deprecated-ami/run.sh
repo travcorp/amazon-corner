@@ -22,7 +22,7 @@ else
   build_dir=/data/teamcity_agents/$agent_name/work/$(basename "$PWD")
 fi
 
-docker build -t ami-check .
+docker build -t ami-check ./cloud-formation/scripts/check-deprecated-ami
 
 echo 'running container'
 docker run \
