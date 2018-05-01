@@ -16,7 +16,7 @@ aws ec2 describe-instances --region $REGION --query 'Reservations[*].Instances[*
 echo finding deprecated images...
 grep -v -f all.txt inuse.txt | sort -u > deprecated.txt
 
-if [ -s ./build/deprecated.txt ]; then
+if [ -s deprecated.txt ]; then
 	echo DEPRECATED AMIS FOUND
 	exit 1
 fi
