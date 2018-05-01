@@ -16,5 +16,6 @@ echo 'running container'
 docker run \
 	--cap-add SYS_ADMIN \
 	-e DEPLOY_ROLE_ARN=$DEPLOY_ROLE_ARN \
+	-e REGION=$REGION \
 	-v $build_dir:/build \
 	ami-check
