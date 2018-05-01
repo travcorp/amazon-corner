@@ -19,6 +19,9 @@ docker run \
 	-v $build_dir:/build \
 	ami-check
 
+pwd
+ls -al $build_dir
+
 if [ -s $build_dir/deprecated.txt ]; then
 	echo deprecated amis found
 	exit 1
