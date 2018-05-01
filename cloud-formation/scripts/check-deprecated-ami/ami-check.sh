@@ -12,8 +12,9 @@ echo fetching images used by running instances...
 aws ec2 describe-instances --region eu-west-1 --query 'Reservations[*].Instances[*].[ImageId, Tags[?Key==`Project`].Value]' --filters "Name=platform, Values=windows" --output text --profile $AWS_PROFILE | paste - - > inuse.txt
 
 echo finding deprecated images...
-grep -v -f all.txt inuse.txt | sort -u > deprecated.txt
-echo moving file...
-cp deprecated.txt ./build
+grep -v -f all.txt inuse.txt | sort -u > ./build/deprecated.txt
 
-echo finished...
+if [ -s ./build/deprecated.txt ]; then
+	echo DEPRECATED AMIS FOUND
+	exit 1
+fi
