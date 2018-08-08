@@ -14,7 +14,7 @@ else {
 // Deleting the existing dynamodb table to make way for a new one
 var destinationdynamodb = new DynamoDB({
     apiVersion: '2012-08-10',
-    region: process.env.REGION, 
+    region: 'eu-west-1', 
     credentials: {
       accessKeyId: process.env.DESTINATION_AWS_KEY,
       secretAccessKey: process.env.DESTINATION_SECRET_KEY
@@ -52,7 +52,7 @@ function copyTable() {
   var destinationAWSConfig = {
     accessKeyId: process.env.DESTINATION_AWS_KEY,
     secretAccessKey: process.env.DESTINATION_SECRET_KEY,
-    region: process.env.REGION // support cross zone copying
+    region: 'eu-west-1' // support cross zone copying
   }
 
   // Copies table over from source to dest.

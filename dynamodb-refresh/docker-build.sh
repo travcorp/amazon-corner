@@ -2,7 +2,7 @@
 set -exu
 
 # Build docker image
-docker build -t tip-database-refresh .
+docker build -t tip-database-refresh ./dynamodb-refresh
 
 echo 'running container'
 
