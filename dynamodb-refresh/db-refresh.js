@@ -1,11 +1,7 @@
 var copy = require('copy-dynamodb-table').copy
 var DynamoDB = require('aws-sdk/clients/dynamodb');
-/*
 
-*/
-
-
-// Check for parameters being set
+// Check for credential parameters being set
 if(process.env.SOURCE_AWS_KEY && process.env.SOURCE_AWS_KEY && process.env.DESTINATION_AWS_KEY && process.env.DESTINATION_SECRET_KEY) { 
   console.log('Environment variables found'); 
 }
@@ -18,7 +14,7 @@ else {
 // Deleting the existing dynamodb table to make way for a new one
 var destinationdynamodb = new DynamoDB({
     apiVersion: '2012-08-10',
-    region: process.env.REGION, 
+    region: process.env.DESTINATION_REGION, 
     credentials: {
       accessKeyId: process.env.DESTINATION_AWS_KEY,
       secretAccessKey: process.env.DESTINATION_SECRET_KEY
@@ -32,14 +28,23 @@ var params = {
 
 console.log("Deleting existing table");
 destinationdynamodb.deleteTable(params, function(err, data) {
-   if (err) console.log(err, err.stack); // an error occurred
-   else     console.log(data);
+  if (err) {
+    console.log(err, err.stack); // an error occurred
+  }
+  else {
+    console.log(data);
+  }
 });
 
 // Wait for table to delete
 destinationdynamodb.waitFor('tableNotExists', params, function(err, data) {
-  if (err) console.log(err, err.stack); // an error occurred
-  else     copyTable();           // successful response results iin copying the table
+  if (err) { 
+    console.log(err, err.stack); // an error occurred
+  }
+  else { // successful response results in copying the table
+    copyTable();           
+    console.log("Copying tables...")
+  }  
 });
 
 // Copy table cross account
