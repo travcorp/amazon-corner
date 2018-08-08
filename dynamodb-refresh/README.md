@@ -10,7 +10,7 @@ This is designed to run on TeamCity as a build job.
 >**NOTE:** This will delete the table before you copy over new information, all old information will be lost. This functionality can be changed in the future.
 
 ## Limitations
-- This tool is designed to copy DynamoDB tables to and from the _same_ region. It is easy to change this but there is no need at the moment.
+- This tool is designed to copy DynamoDB tables to and from the _same_ region. It is easy to change this but there is no need for this at the moment.
 - Existing table is deleted before copy. Again, this can be removed or changed to be optional, but it is not needed at the moment
 
 ## Running on Teamcity

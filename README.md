@@ -7,4 +7,8 @@ A set of helper scripts to automate AWS infrastructure:
 
 ## Checks for Deprecated AMIs
 Files required for a TeamCity job to check ami status in production.
-* [AMI Deprecation check](cloud-formation/scripts/check-deprecated-ami)
+* [AMI Deprecation check](./check-deprecated-ami)
+
+## DynamoDB Table Refresh
+Node app/tool allows cross-account table copying
+* [AMI Deprecation check](./dynamodb-refresh)
