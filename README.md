@@ -11,4 +11,4 @@ Files required for a TeamCity job to check ami status in production.
 
 ## DynamoDB Table Refresh
 Node app/tool allows cross-account table copying
-* [DynamoDB Table Refresh(./dynamodb-refresh)
+* [DynamoDB Table Refresh](./dynamodb-refresh)
