@@ -1,0 +1,24 @@
+{
+  "name": "dynamo-backup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db-refresh.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/travcorp/TIP-DynamoDB-Database-Refresh.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/travcorp/TIP-DynamoDB-Database-Refresh/issues"
+  },
+  "homepage": "https://github.com/travcorp/TIP-DynamoDB-Database-Refresh#readme",
+  "dependencies": {
+    "aws-sdk": "^2.288.0",
+    "copy-dynamodb-table": "^2.0.13"
+  }
+}
