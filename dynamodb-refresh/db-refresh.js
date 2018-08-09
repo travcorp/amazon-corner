@@ -42,8 +42,8 @@ destinationdynamodb.waitFor('tableNotExists', params, function(err, data) {
     console.log(err, err.stack); // an error occurred
   }
   else { // successful response results in copying the table
-    copyTable();           
     console.log("Copying tables...")
+    copyTable();           
   }  
 });
 
