@@ -11,8 +11,10 @@ docker run \
     --cap-add SYS_ADMIN \
     -e SOURCE_AWS_KEY \
     -e SOURCE_SECRET_KEY \
+    -e SOURCE_REGION \
+    -e SOURCE_TABLE_NAME \
     -e DESTINATION_AWS_KEY \
     -e DESTINATION_SECRET_KEY \
-    -e REGION \
-    -e TABLE_NAME \
+    -e DESTINATION_REGION \
+    -e DESTINATION_TABLE_NAME \
 tip-database-refresh
