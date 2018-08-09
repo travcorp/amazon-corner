@@ -3,13 +3,30 @@ var DynamoDB = require('aws-sdk/clients/dynamodb');
 
 // Check for credential parameters being set
 if(process.env.SOURCE_AWS_KEY && process.env.SOURCE_AWS_KEY && process.env.DESTINATION_AWS_KEY && process.env.DESTINATION_SECRET_KEY) { 
-  console.log('Environment variables found'); 
+  console.log('Credentials set'); 
 }
 else { 
-  console.log('Environment variables not set!'); 
+  console.log('Credentials not set!'); 
   return process.exit(911);
 }
 
+// Check for region being set
+if(process.env.SOURCE_REGION && process.env.DESTINATION_REGION) { 
+  console.log('Regions set'); 
+}
+else { 
+  console.log('Regions not set!'); 
+  return process.exit(911);
+}
+
+// Check for table names being set
+if(process.env.SOURCE_TABLE_NAME && process.env.DESTINATION_TABLE_NAME) { 
+  console.log('Table names set'); 
+}
+else { 
+  console.log('Table names not set!'); 
+  return process.exit(911);
+}
 
 // Deleting the existing dynamodb table to make way for a new one
 var destinationdynamodb = new DynamoDB({
