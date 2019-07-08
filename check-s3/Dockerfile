@@ -18,4 +18,4 @@ ADD https://raw.githubusercontent.com/travcorp/amazon-corner/master/cloud-format
 RUN chmod +x ./s3-check.sh 
 RUN chmod +x ./aws-assume-role.sh 
 
-ENTRYPOINT ["./ami-check.sh"]
+ENTRYPOINT ["./s3-check.sh"]
