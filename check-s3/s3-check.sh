@@ -23,7 +23,6 @@ do
 done
 
 echo Done
-cat out
 
-#cat out  | grep checked | sed 's/  / /g' | awk '{print $6, $3 }' | grep 20 | sort  | head -n 30
+cat out  | grep checked | sed 's/  / /g' | awk '{print $6, $3 }' | grep 20 | sort  | head -n 50 > oldestBuckets.txt
 
