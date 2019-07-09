@@ -3,9 +3,15 @@ AWS_PROFILE=`. /aws-assume-role.sh $DEPLOY_ROLE_ARN`
 
 cd build
 
-echo seting region...
+echo setting region...
 aws configure set region $REGION
 export AWS_DEFAULT_REGION=$REGION
+
+
+echo checking perms
+aws ec2 describe-instances
+
+echo done...
 
 echo fetching s3 buckets and latest object
 
