@@ -7,20 +7,14 @@ echo setting region...
 aws configure set region $REGION
 export AWS_DEFAULT_REGION=$REGION
 
-
-echo checking perms
-aws ec2 describe-instances
-
-echo done...
-
 echo fetching s3 buckets and latest object
 
-for BUCKET in `aws s3 ls | cut -d' ' -f 3` ;
+for BUCKET in `aws --profile $AWS_PROFILE s3 ls | cut -d' ' -f 3` ;
 do
 	echo bucket is $BUCKET
 
         #aws s3 ls $BUCKET --recursive | sort | tail -n 1 | awk '{print $4}'
-        LINE=`aws s3 ls $BUCKET --recursive | sort | tail -n 1 `
+        LINE=`aws --profile $AWS_PROFILE s3 ls $BUCKET --recursive | sort | tail -n 1 `
 
         echo checked bucket $BUCKET and found $LINE >> out
 
