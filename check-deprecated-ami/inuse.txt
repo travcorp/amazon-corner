@@ -1,0 +1,139 @@
+------------------------------------------------------------------------------------------------------------------------------------------
+|                                                            DescribeInstances                                                           |
++---------------------+------------------+------------------------+----------------------------------------------------------------------+
+|     InstanceId      |     Project      |          ami           |                                name                                  |
++---------------------+------------------+------------------------+----------------------------------------------------------------------+
+|  i-f69c987e         |  dcproxy         |  ami-bff32ccc          |  dcproxy-secondary-reports                                           |
+|  i-a606042e         |  dcproxy         |  ami-bff32ccc          |  dcproxy-secondary-das                                               |
+|  i-0a0d0f82         |  dcproxy         |  ami-bff32ccc          |  dcproxy-secondary-dasbs                                             |
+|  i-7ba881f6         |  MMD             |  ami-7943ec0a          |  MMD.dev.ActiveDirectory                                             |
+|  i-7e2d2ef3         |  SSO             |  ami-3367d340          |  SSO.TestingClientForUATandPROD                                      |
+|  i-7b0367f7         |  dcproxy         |  ami-bff32ccc          |  dcproxy-primary-reports                                             |
+|  i-dc036750         |  dcproxy         |  ami-bff32ccc          |  dcproxy-bastion                                                     |
+|  i-3de083b1         |  dcproxy         |  ami-bff32ccc          |  dcproxy-primary-das                                                 |
+|  i-5de88bd1         |  dcproxy         |  ami-bff32ccc          |  dcproxy-primary-dasbs                                               |
+|  i-da8fe756         |  iTropics        |  ami-29eb7e5a          |  iTropics CI Web                                                     |
+|  i-a88ee624         |  iTropics        |  ami-29eb7e5a          |  iTropics CI Bastion                                                 |
+|  i-06e121b565b9e5923|  dcproxy         |  ami-bff32ccc          |  dcproxy-secondary-restapi                                           |
+|  i-0992669ef2b767575|  dcproxy         |  ami-bff32ccc          |  dcproxy-secondary-tropics                                           |
+|  i-0f717bd91f3132177|  dcproxy         |  ami-bff32ccc          |  dcproxy-secondary-tropicsbs                                         |
+|  i-05a925571a26edf1f|  iTropics        |  ami-a8592cdb          |  iTropics for PaymentService ZoneB Web                               |
+|  i-077ada71d665bafa4|  dcproxy         |  ami-bff32ccc          |  dcproxy-secondary-tour-api                                          |
+|  i-01e31e52804b01f62|  dcproxy         |  ami-70edb016          |  dcproxy-secondary-travelagents-api                                  |
+|  i-0675ce7a0bcd24c8f|  dcproxy         |  ami-bff32ccc          |  dcproxy-primary-restapi                                             |
+|  i-0611094840cea42d1|  Sonar           |  ami-e1398992          |  Sonar.dev.BastionServer.dev                                         |
+|  i-0edbb71e5e62e70c7|  iTropics        |  ami-29eb7e5a          |  iTropics Booking Services Bastion                                   |
+|  i-092b7bcc9d4caba11|  iTropics        |  ami-29eb7e5a          |  iTropics Booking Services ZoneA Web                                 |
+|  i-091bd98e5a6515ba1|  dcproxy         |  ami-bff32ccc          |  dcproxy-primary-tropics                                             |
+|  i-073d3fcd527ec4411|  dcproxy         |  ami-bff32ccc          |  dcproxy-primary-tropicsbs                                           |
+|  i-0dfdeb4d5670a2951|  dcproxy         |  ami-bff32ccc          |  dcproxy-primary-ldaps                                               |
+|  i-0c6f5e7de17bff1a6|  iTropics        |  ami-a8592cdb          |  iTropics for PaymentService Bastion                                 |
+|  i-0d107d84306e62413|  iTropics        |  ami-a8592cdb          |  iTropics for PaymentService ZoneA Web                               |
+|  i-0d3a194944e4838b1|  dcproxy         |  ami-bff32ccc          |  dcproxy-primary-tour-api                                            |
+|  i-061ed2817259efc92|  SSO             |  ami-c51e3eb6          |  SSO.dev.FakeTravelAgentsAPI                                         |
+|  i-04bb301c8ad07aa02|  dcproxy         |  ami-70edb016          |  dcproxy-primary-travelagents-api                                    |
+|  i-020f7d7383da8bb31|  SSO             |  ami-d3dee9b5          |  SSO.dev.DQHMigration                                                |
+|  i-0ea91945ba8edcc6c|  None            |  ami-785db401          |  BookingServicesBastion                                              |
+|  i-09b052dc177f4fac9|  None            |  ami-785db401          |  BookingServicesBastion.App                                          |
+|  i-09e4763bb7e6ff8d1|  Whitelabel      |  ami-087f8793c71c8c662 |  WhiteLabel-Frontend-Instance-Green                                  |
+|  i-096740692ec092900|  Whitelabel      |  ami-03e696d2cdcbf5a2c |  WhiteLabel-Frontend-Instance-Blue                                   |
+|  i-0ff31ba2ff5b17ccb|  BookingServices |  ami-95f8d2f3          |  BookingServices.Cluster                                             |
+|  i-018cf02bb9a3ff48f|  ContentOne      |  ami-0e7fe1d1e90e8d2f1 |  ContentOne-Courier-CMS                                              |
+|  i-0326557e899137ef4|  BookingServices |  ami-95f8d2f3          |  BookingServices.Cluster                                             |
+|  i-00a225a3de5881d80|  None            |  ami-00c3b2d35bddd4f5c |  ReviewAppsWorkerNodeAutoScalingGroup                                |
+|  i-095cdcdb0e67446cf|  None            |  ami-00c3b2d35bddd4f5c |  ReviewAppsWorkerNodeAutoScalingGroup                                |
+|  i-0a78657f80d52c7cf|  None            |  ami-00c3b2d35bddd4f5c |  ReviewAppsWorkerNodeAutoScalingGroup                                |
+|  i-0070d6dec23db1508|  ContentOne      |  ami-0f7feca4a37bceba8 |  ContentOne-Frontend-Instance-Green                                  |
+|  i-045bf019ca5de6961|  None            |  ami-0a7313ee6c5ea3183 |  booking-services-dev-bs-standard-workers-Node                       |
+|  i-01f9709fc24021ea5|  None            |  ami-09bbefc07310f7914 |  booking-services-eks-dev-booking-services-eks-dev-node-group-Node   |
+|  i-0755035dd9618a7f9|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.InDesignServerGroup.v0001                                   |
+|  i-0e2aed3fadae6a74c|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.WebServerGroup.v0001                                        |
+|  i-02cebf89e126e6da3|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.WorkerGroup.v0001                                           |
+|  i-0e9187575448df0c7|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.WebServerGroup.v0001                                        |
+|  i-07703608c31c70edf|  MMD             |  ami-0ea83ef2bc1efef82 |  TIP.dev.WebServerGroup.v0001                                        |
+|  i-079e88bcc10b3e7c1|  PaymentServices |  ami-0248e2d56d2dd5ae3 |  PaymentServices.WebServer                                           |
+|  i-0601571d98fee0d39|  None            |  ami-047bb4163c506cd98 |  datalake-proxy - nigel                                              |
+|  i-097822facc78ac40e|  None            |  ami-09693313102a30b2c |  niitdeveloper                                                       |
+|  i-047cf13f8812d2cde|  None            |  ami-0902d7d8337174a25 |  Whitelabel-Template-usingElasticBeanstalk                           |
+|  i-0a99445000031da56|  None            |  ami-0cce0d06b155cb3d3 |  SSO-Utilities-Template                                              |
+|  i-0e0f6d2dd2d72059a|  None            |  ami-009af7c43be38087d |  MMD Windows Server 2012 Template                                    |
+|  i-01c96df072c9d4adf|  None            |  ami-047bb4163c506cd98 |  None                                                                |
+|  i-0e54c79894e4513cd|  None            |  ami-0a7313ee6c5ea3183 |  booking-services-dev-bs-standard-workers-Node                       |
+|  i-01aaadace5d87c55c|  None            |  ami-09bbefc07310f7914 |  booking-services-eks-dev-booking-services-eks-dev-node-group-Node   |
+|  i-0d83064205f8c2373|  pr-apps         |  ami-4d46d534          |  bs-pr-apps-flynn-cluster-node-1-new                                 |
+|  i-07bab58c1f600bb55|  Whitelabel      |  ami-0e2089a08e0707fe2 |  WhiteLabel-Courier-CMS                                              |
+|  i-0774b6f9aceb878cc|  None            |  ami-0fad7378adf284ce0 |  test-pci                                                            |
+|  i-02835e7b79b7d30d0|  None            |  ami-00035f41c82244dab |  bastion                                                             |
+|  i-0d8b94eba6bbd7d76|  BookingServices |  ami-95f8d2f3          |  BookingServices.Cluster                                             |
+|  i-09a5e8fbdadb20f59|  None            |  ami-009af7c43be38087d |  SSO Image Template                                                  |
+|  i-082b8537a2d2b1279|  ContentOne      |  ami-08a92ed64caa44b84 |  ContentOne-Bastion                                                  |
+|  i-0d1015f20734da0d9|  None            |  ami-02f0a4701f9b8a91e |  datalake.dev.PowerBIGateway                                         |
+|  i-0c31b7a4f0f56b887|  None            |  ami-02f0a4701f9b8a91e |  datalake.dev.PowerBIGatewayBastion                                  |
+|  i-0f270394cbd5dd81f|  datalake        |  ami-03c242f4af81b2365 |  datalake.dev.DatabaseProxy                                          |
+|  i-0ecbaa98e61cbe661|  None            |  ami-00c3b2d35bddd4f5c |  ReviewAppsWorkerNodeAutoScalingGroup                                |
+|  i-0561d537fb7675dec|  None            |  ami-00c3b2d35bddd4f5c |  ReviewAppsWorkerNodeAutoScalingGroup                                |
+|  i-0b8611f934622a121|  None            |  ami-0bbc25e23a7640b9b |  Hanad-test                                                          |
+|  i-0a7cad9c98bdc08e2|  ContentOne      |  ami-0b043b27228161f2b |  ContentOne-Frontend-Instance-Blue                                   |
+|  i-0e2a52cde29eca5ae|  FlightCentre    |  ami-748e2903          |  FlightCentre.BastionServer                                          |
+|  i-0a170f8d0450592b5|  FlightCentre    |  ami-748e2903          |  FlightCentre.WebServer                                              |
+|  i-0b1d1758c624a4029|  None            |  ami-0a7313ee6c5ea3183 |  booking-services-dev-bs-standard-workers-Node                       |
+|  i-020bb4cb9e5fd8e4a|  None            |  ami-00c3b2d35bddd4f5c |  ReviewAppsWorkerNodeAutoScalingGroup                                |
+|  i-0acb023f184a319f3|  None            |  ami-09bbefc07310f7914 |  booking-services-eks-dev-booking-services-eks-dev-node-group-Node   |
+|  i-017a27bd0d0ba0a56|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.WebServerGroup.v0001                                        |
+|  i-06f193a8470aec949|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.InDesignServerGroup.v0001                                   |
+|  i-09e08417f10ca245a|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.BastionServer.v0001                                         |
+|  i-0090fee3c2ebed07f|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.WorkerGroup.v0001                                           |
+|  i-0a238aea8748e3f16|  MMD             |  ami-0ea83ef2bc1efef82 |  MMD.dev.NServiceBusMonitor.v0001                                    |
+|  i-0de0d5138921784af|  Whitelabel      |  ami-011b5156c098025a0 |  Whitelabel-Bastion                                                  |
+|  i-05564b2977eee5df1|  None            |  ami-011b5156c098025a0 |  powerbi-cluster-test                                                |
+|  i-03dd1cea123fa604c|  None            |  ami-011b5156c098025a0 |  powerbi-cluster-test                                                |
+|  i-04dde27d16969bc2e|  None            |  ami-011b5156c098025a0 |  powerbi-cluster-test                                                |
+|  i-0ad92f58c7f2b9cc4|  MMD             |  ami-0ea83ef2bc1efef82 |  TIP.dev.BastionServer.v0001                                         |
+|  i-0cf9e7db26df8736f|  MMD             |  ami-0ea83ef2bc1efef82 |  TIP.dev.WebServerGroup.v0001                                        |
+|  i-02e7a2ea21a5c5501|  MMD             |  ami-0ea83ef2bc1efef82 |  TIP.dev.WebServerGroup.v0001                                        |
+|  i-088dfdc737bc05b16|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0f0080541299e6091|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-007c7a85782bbe49d|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0c7c167c070d93cda|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0db65638eec8f3031|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0170131cec0262173|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0aa03333d4d35d879|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0b2bfdbc8f73de296|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-012d326c74a840593|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0ee31b8f0bbd31d0a|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0648ad897212090fe|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-03e30cdae7eb8cd23|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0901b99cdb8aa2b01|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0757dd85f67873dc4|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0834b261ee9922f26|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-06b9b97263c3c726a|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-071419d3155255fb6|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-07dc82f0a4f012c38|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-03a8988b4344373e9|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0190682e0723a967f|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0d24daeb8bf77e2ab|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-08c11afe8f422a17b|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-062f0ea9d9e139eda|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0950dd27e35f76d8b|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0b994ba79c5baa44b|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0e7be31cd42aff194|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-055d3b4093d4d16b7|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0214b17323065a546|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0cf5dd943764e8e02|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0a9d13932fc790357|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0f519f9439dbf634f|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-08980c6f494137c41|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0de79621a7f26921d|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-04b49d83549795d54|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-05d829561ddb3b890|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-095643d9f15883f93|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0800cf4eceed2f214|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-078cead28c1b2c542|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0b7228bd1b5e69890|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-0ef06ce8a56f89f59|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-032ff626dc79ac609|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-01a2e88b3567bd733|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-05d5ebfd2bda8d402|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-03e782b6a656a146c|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
+|  i-01c454488b68a549b|  datalake        |  ami-09495b5e4ba13b850 |  None                                                                |
++---------------------+------------------+------------------------+----------------------------------------------------------------------+

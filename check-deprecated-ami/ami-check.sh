@@ -1,12 +1,12 @@
 #! /bin/bash
-# AWS_PROFILE=`. /aws-assume-role.sh $DEPLOY_ROLE_ARN`
-AWS_PROFILE=dev
+AWS_PROFILE=`. /aws-assume-role.sh $DEPLOY_ROLE_ARN`
+# AWS_PROFILE=dev
 
-# cd build
+cd build
 
-# echo seting region...
+echo seting region...
 # aws configure set region $REGION
-# export AWS_DEFAULT_REGION=$REGION
+export AWS_DEFAULT_REGION=$REGION
 
 echo fetching available images...
 aws ec2 describe-images --query 'Images[*].{ID:ImageId}' --output text --profile $AWS_PROFILE > all.txt
