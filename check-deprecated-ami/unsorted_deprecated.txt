@@ -1,0 +1,23 @@
+------------------------------------------------------------------------------------------------------------------------------------------
+|                                                            DescribeInstances                                                           |
++---------------------+------------------+------------------------+----------------------------------------------------------------------+
+|     InstanceId      |     Project      |          ami           |                                name                                  |
++---------------------+------------------+------------------------+----------------------------------------------------------------------+
+|  i-7ba881f6         |  MMD             |  ami-7943ec0a          |  MMD.dev.ActiveDirectory                                             |
+|  i-7e2d2ef3         |  SSO             |  ami-3367d340          |  SSO.TestingClientForUATandPROD                                      |
+|  i-da8fe756         |  iTropics        |  ami-29eb7e5a          |  iTropics CI Web                                                     |
+|  i-a88ee624         |  iTropics        |  ami-29eb7e5a          |  iTropics CI Bastion                                                 |
+|  i-05a925571a26edf1f|  iTropics        |  ami-a8592cdb          |  iTropics for PaymentService ZoneB Web                               |
+|  i-0edbb71e5e62e70c7|  iTropics        |  ami-29eb7e5a          |  iTropics Booking Services Bastion                                   |
+|  i-092b7bcc9d4caba11|  iTropics        |  ami-29eb7e5a          |  iTropics Booking Services ZoneA Web                                 |
+|  i-0c6f5e7de17bff1a6|  iTropics        |  ami-a8592cdb          |  iTropics for PaymentService Bastion                                 |
+|  i-0d107d84306e62413|  iTropics        |  ami-a8592cdb          |  iTropics for PaymentService ZoneA Web                               |
+|  i-020f7d7383da8bb31|  SSO             |  ami-d3dee9b5          |  SSO.dev.DQHMigration                                                |
+|  i-047cf13f8812d2cde|  None            |  ami-0902d7d8337174a25 |  Whitelabel-Template-usingElasticBeanstalk                           |
+|  i-0a99445000031da56|  None            |  ami-0cce0d06b155cb3d3 |  SSO-Utilities-Template                                              |
+|  i-0e0f6d2dd2d72059a|  None            |  ami-009af7c43be38087d |  MMD Windows Server 2012 Template                                    |
+|  i-09a5e8fbdadb20f59|  None            |  ami-009af7c43be38087d |  SSO Image Template                                                  |
+|  i-082b8537a2d2b1279|  ContentOne      |  ami-08a92ed64caa44b84 |  ContentOne-Bastion                                                  |
+|  i-0d1015f20734da0d9|  None            |  ami-02f0a4701f9b8a91e |  datalake.dev.PowerBIGateway                                         |
+|  i-0c31b7a4f0f56b887|  None            |  ami-02f0a4701f9b8a91e |  datalake.dev.PowerBIGatewayBastion                                  |
++---------------------+------------------+------------------------+----------------------------------------------------------------------+
