@@ -7,25 +7,29 @@ AWS_PROFILE=dev
 
 echo fetching s3 buckets and latest object...
 
-for BUCKET in `aws --profile $AWS_PROFILE s3 ls | cut -d' ' -f 3` ;
+for BUCKET in `aws --profile $AWS_PROFILE s3 ls | cut -d' ' -f 3 | head` ;
 do
 	echo checking $BUCKET...
 
-	LAST_MOD=$(aws s3api list-objects-v2 --bucket $BUCKET --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0]' --profile dev --output text)
-
-        #aws s3 ls $BUCKET --recursive | sort | tail -n 1 | awk '{print $4}'
-        # LINE=`aws --profile $AWS_PROFILE s3 ls $BUCKET --recursive | sort | tail -n 1 `
-	if [[ $LAST_MOD == "None" ]]; then
-		RESULT="no old files" 
+	# LAST_MOD=$(aws s3api list-objects-v2 --bucket $BUCKET --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0]' --profile dev --output text)
+	LAST_MOD=$(aws s3api list-objects-v2 --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0] | [0]' --profile dev --output json --bucket $BUCKET 2>/dev/null)
+	
+	if [[ $LAST_MOD == "null" ]]; then
+		OUTPUT="no old files" 
 	elif [[ $LAST_MOD == "" ]]; then
-		RESULT="empty bucket"
+		OUTPUT="empty"
+		echo $BUCKET $OUTPUT >> dirty-old-buckets.txt
+	else
+		echo $BUCKET $LAST_MOD >> dirty-old-buckets.txt
+		OUTPUT=$LAST_MOD
 	fi
 	
-	echo checked bucket $BUCKET and found $RESULT >> output.log
+	echo checked bucket $BUCKET and found $OUTPUT >> output.txt
 
-	echo $BUCKET $LAST_MOD >> buckets.old
 done
 
-# echo Done
+cat dirty-old-buckets.txt | column -t > old-buckets.txt
 
-# cat out  | grep checked | sed 's/  / /g' | awk '{print $6, $3 }' | grep 20 | sort  | head -n 50 > oldestBuckets.txt
+cp old-buckets.txt output.txt /build
+
+echo Done
