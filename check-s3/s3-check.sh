@@ -10,12 +10,8 @@ for BUCKET in `aws --profile $AWS_PROFILE s3 ls | cut -d' ' -f 3 | head -n6` ;
 do
 	echo checking $BUCKET...
 	
-	LAST_MOD=$(aws s3api list-objects-v2 --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0] | [0]' --profile dev --output json --bucket $BUCKET 2>/dev/null)
+	LAST_MOD=$(aws s3api list-objects-v2 --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0] | [0]' --profile $PROFILE --output json --bucket $BUCKET 2>/dev/null)
 	
-	aws s3api list-objects-v2 --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0] | [0]' --profile dev --output json --bucket $BUCKET
-	echo checked bucket $BUCKET returned ----- $LAST_MOD >> debug.txt
-	echo this is lastmod: $LAST_MOD
-
 	if [[ $LAST_MOD == "null" ]]; then
 		OUTPUT="no old files" 
 	elif [[ $LAST_MOD == "" ]]; then
@@ -34,6 +30,6 @@ echo formatting output...
 cat dirty-old-buckets.txt | column -t > old-buckets.txt
 
 echo moving artifacts...
-cp old-buckets.txt output.txt debug.txt /build
+cp old-buckets.txt output.txt /build
 
 echo Done
