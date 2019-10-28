@@ -9,7 +9,6 @@ echo fetching s3 buckets and latest object...
 for BUCKET in `aws --profile $AWS_PROFILE s3 ls | cut -d' ' -f 3 | head -n6` ;
 do
 	echo checking $BUCKET...
-	echo hello this is a change
 	
 	LAST_MOD=$(aws s3api list-objects-v2 --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0] | [0]' --profile dev --output json --bucket $BUCKET 2>/dev/null)
 	echo checked bucket $BUCKET returned ----- $LAST_MOD >> debug.txt
@@ -28,8 +27,10 @@ do
 
 done
 
+echo formatting output...
 cat dirty-old-buckets.txt | column -t > old-buckets.txt
 
+echo moving artifacts...
 cp old-buckets.txt output.txt debug.txt /build
 
 echo Done
