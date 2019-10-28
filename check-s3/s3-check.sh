@@ -12,6 +12,7 @@ do
 	
 	LAST_MOD=$(aws s3api list-objects-v2 --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0] | [0]' --profile dev --output json --bucket $BUCKET 2>/dev/null)
 	echo checked bucket $BUCKET returned ----- $LAST_MOD >> debug.txt
+	echo this is lastmod: $LAST_MOD
 	
 	if [[ $LAST_MOD == "null" ]]; then
 		OUTPUT="no old files" 
