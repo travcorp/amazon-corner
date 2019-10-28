@@ -30,6 +30,6 @@ done
 
 cat dirty-old-buckets.txt | column -t > old-buckets.txt
 
-cp old-buckets.txt output.txt /build
+cp old-buckets.txt output.txt debug.txt /build
 
 echo Done
