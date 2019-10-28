@@ -6,11 +6,13 @@ export AWS_DEFAULT_REGION=$REGION
 
 echo fetching s3 buckets and latest object...
 
-for BUCKET in `aws --profile $AWS_PROFILE s3 ls | cut -d' ' -f 3` ;
+for BUCKET in `aws --profile $AWS_PROFILE s3 ls | cut -d' ' -f 3 | head -n6` ;
 do
 	echo checking $BUCKET...
 
+	
 	LAST_MOD=$(aws s3api list-objects-v2 --query 'Contents[?LastModified<=`2018-12-31`][LastModified, Key] | sort_by(@,&[0]) | [0] | [0]' --profile dev --output json --bucket $BUCKET 2>/dev/null)
+	echo checked bucket $BUCKET returned ----- $LAST_MOD >> debug.txt
 	
 	if [[ $LAST_MOD == "null" ]]; then
 		OUTPUT="no old files" 
