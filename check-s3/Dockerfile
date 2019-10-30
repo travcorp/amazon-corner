@@ -4,7 +4,8 @@ RUN apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y \
 		python3 \
-		curl
+		curl \
+		bsdmainutils
 RUN python3 --version
 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
