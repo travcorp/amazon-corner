@@ -15,8 +15,7 @@ aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Project:Tags[?
 
 echo finding deprecated images...
 grep -v -f all.txt inuse.txt > deprecated.txt
-
-if [ -s deprecated.txt ]; then
+if grep ami-  deprecated.txt ; then
 	echo DEPRECATED AMIS FOUND
 	exit 1
 fi
