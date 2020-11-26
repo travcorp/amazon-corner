@@ -1,7 +1,7 @@
 #! /bin/bash
 set -e
 
-TEMP_ROLE=$(aws sts assume-role --role-arn $ROLE --role-session-name CLI-SESSION)
+TEMP_ROLE=$(aws sts assume-role --role-arn $AWS_PROFILE --role-session-name CLI-SESSION)
 
 export AWS_ACCESS_KEY_ID=$(echo $TEMP_ROLE | jq .Credentials.AccessKeyId | xargs)
 export AWS_SECRET_ACCESS_KEY=$(echo $TEMP_ROLE | jq .Credentials.SecretAccessKey | xargs)
