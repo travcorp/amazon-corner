@@ -10,20 +10,17 @@ export AWS_SESSION_TOKEN=$(echo $PROFILE | jq .Credentials.SessionToken | xargs)
 echo seting region...
 export AWS_DEFAULT_REGION=$REGION
 
-aws iam list-users
-aws s3 ls
+cd build
 
-# cd build
+echo fetching available images...
+aws ec2 describe-images --query 'Images[*].{ID:ImageId}' --output text > all.txt
 
-# echo fetching available images...
-# aws ec2 describe-images --query 'Images[*].{ID:ImageId}' --output text --profile $PROFILE > all.txt
+echo fetching images used by running instances...
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Project:Tags[?Key==`Project`].Value | [0],AMI:ImageId, Name:Tags[?Key==`Name`] | [0].Value,Instance:InstanceId, Project:Tags[?Key==`Project`] | [0].Value} | [] | sort_by(@,&to_string(Project))' --output table > inuse.txt
 
-# echo fetching images used by running instances...
-# aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Project:Tags[?Key==`Project`].Value | [0],AMI:ImageId, Name:Tags[?Key==`Name`] | [0].Value,Instance:InstanceId, Project:Tags[?Key==`Project`] | [0].Value} | [] | sort_by(@,&to_string(Project))' --output table --profile $PROFILE > inuse.txt
-
-# echo finding deprecated images...
-# grep -v -f all.txt inuse.txt > deprecated.txt
-# if grep ami-  deprecated.txt ; then
-# 	echo DEPRECATED AMIS FOUND
-# 	exit 1
-# fi
+echo finding deprecated images...
+grep -v -f all.txt inuse.txt > deprecated.txt
+if grep ami-  deprecated.txt ; then
+	echo DEPRECATED AMIS FOUND
+	exit 1
+fi
