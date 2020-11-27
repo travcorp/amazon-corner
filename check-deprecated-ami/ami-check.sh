@@ -6,7 +6,7 @@ echo seting region...
 # export AWS_DEFAULT_REGION=$REGION
 
 # PROFILE=$(aws sts assume-role --role-arn arn:aws:iam::845786622553:role/deploy_prod_role --role-session-name CLI-SESSION)
-aws sts assume-role --role-arn arn:aws:iam::845786622553:role/deploy_prod_role --role-session-name CLI-SESSION
+aws sts assume-role --role-arn $DEPLOY_ROLE_ARN --role-session-name CLI-SESSION
 
 # export AWS_ACCESS_KEY_ID=$(echo $PROFILE | jq .Credentials.AccessKeyId | xargs)
 # export AWS_SECRET_ACCESS_KEY=$(echo $PROFILE | jq .Credentials.SecretAccessKey | xargs)
