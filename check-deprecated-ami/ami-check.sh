@@ -1,20 +1,17 @@
 #! /bin/bash
 set -e
-# AWS_PROFILE=`. /aws-assume-role.sh $DEPLOY_ROLE_ARN`
 
-echo seting region...
-# export AWS_DEFAULT_REGION=$REGION
-
+echo seting user profile...
 PROFILE=$(aws sts assume-role --role-arn $DEPLOY_ROLE_ARN --role-session-name CLI-SESSION)
-echo $PROFILE
-
 export AWS_ACCESS_KEY_ID=$(echo $PROFILE | jq .Credentials.AccessKeyId | xargs)
 export AWS_SECRET_ACCESS_KEY=$(echo $PROFILE | jq .Credentials.SecretAccessKey | xargs)
 export AWS_SESSION_TOKEN=$(echo $PROFILE | jq .Credentials.SessionToken | xargs)
 
-echo $AWS_ACCESS_KEY_ID
+echo seting region...
+export AWS_DEFAULT_REGION=$REGION
 
 aws iam list-users
+aws s3 ls
 
 # cd build
 
