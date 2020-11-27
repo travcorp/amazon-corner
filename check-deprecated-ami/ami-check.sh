@@ -14,7 +14,7 @@ export AWS_SESSION_TOKEN=$(echo $PROFILE | jq .Credentials.SessionToken | xargs)
 
 echo $AWS_ACCESS_KEY_ID
 
-# aws s3 ls
+aws iam list-users
 
 # cd build
 
