@@ -64,6 +64,7 @@ template_file=
 template_url=
 assume_role_arn=
 region=
+tags=
 
 while getopts "e:s:p:f:a:r:u:" arg
 do
@@ -92,6 +93,9 @@ do
             ;;
         r)
             region=$OPTARG
+            ;;
+        t)
+            tag=$OPTARG
             ;;
         *)
             echo "ERROR: Unknown parameter '$PARAM'"
