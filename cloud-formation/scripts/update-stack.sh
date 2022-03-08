@@ -97,7 +97,7 @@ do
             region=$OPTARG
             ;;
         t)
-            tag=$OPTARG
+            tags=$OPTARG
             ;;
         *)
             echo "ERROR: Unknown parameter '$PARAM'"
