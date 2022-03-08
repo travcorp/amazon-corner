@@ -1,7 +1,5 @@
 #!/bin/bash
-set -eu
 
-echo python --version
 usage()
 {
     echo "Usage: $0 [options]"
