@@ -125,7 +125,7 @@ fi
 
 update_start_time=`date +"%Y-%m-%dT%H:%M:%S"`
 
-update_stack_cmd="aws --region $region --color on cloudformation update-stack --stack-name $stack --capabilities CAPABILITY_IAM"
+update_stack_cmd="aws --region $region --color on cloudformation update-stack --stack-name $stack --tags Key=Project,Value=agent-payment-form --capabilities CAPABILITY_IAM"
 
 if [ "$template_url" != "" ];then
    update_stack_cmd="$update_stack_cmd --template-url $template_url"
