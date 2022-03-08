@@ -19,7 +19,7 @@ else
 fi
 
 echo Creating stack $stack_name
-stack_id=$(aws cloudformation create-stack --stack-name $stack_name --template-url $stack_template_url --capabilities CAPABILITY_IAM --region $region --profile $profile --output text $params) \
+stack_id=$(aws cloudformation create-stack --stack-name $stack_name --template-url $stack_template_url --tags $tags --capabilities CAPABILITY_IAM --region $region --profile $profile --output text $params) \
   || (>&2 echo FAILURE: Stack $stack_name failed to create. See the error above! \
 	 && exit 1) \
   || exit 1
