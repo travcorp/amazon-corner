@@ -142,7 +142,7 @@ if [ "$stack_parameters" != "" ];then
 fi
 
 if [ "$tags" != "" ];then
-   update_stack_cmd="$update_stack_cmd --parameters $tags"
+   update_stack_cmd="$update_stack_cmd --tags $tags"
 fi
 
 #if [ "$assume_role_arn" != "" ];then
