@@ -68,7 +68,7 @@ assume_role_arn=
 region=
 tags=
 
-while getopts "e:s:p:f:a:r:u:" arg
+while getopts "e:s:p:f:a:r:u:t:" arg
 do
      case "$arg" in
         h)
