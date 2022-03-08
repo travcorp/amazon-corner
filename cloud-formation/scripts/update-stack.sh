@@ -20,6 +20,8 @@ usage()
     echo ""
     echo "  -r The AWS region"
     echo ""
+    echo "  -t The AWS tags"
+    echo ""
     echo "e.g: sh update-stack.sh -e dev -s payment-services-application-latest -f application.yaml -r eu-west-1"
     echo ""
 }
