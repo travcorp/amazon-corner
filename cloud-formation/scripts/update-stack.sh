@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -eu
 usage()
 {
     echo "Usage: $0 [options]"
