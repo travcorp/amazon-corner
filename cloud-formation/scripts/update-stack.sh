@@ -20,8 +20,8 @@ usage()
     echo ""
     echo "  -r The AWS region"
     echo ""
-    echo "  -t The AWS tags"
-    echo ""
+    # echo "  -t The AWS tags"
+    # echo ""
     echo "e.g: sh update-stack.sh -e dev -s payment-services-application-latest -f application.yaml -r eu-west-1"
     echo ""
 }
@@ -66,9 +66,9 @@ template_file=
 template_url=
 assume_role_arn=
 region=
-tags=
+#tags=
 
-while getopts "e:s:p:f:a:r:u:t:" arg
+while getopts "e:s:p:f:a:r:u:" arg
 do
      case "$arg" in
         h)
@@ -96,9 +96,9 @@ do
         r)
             region=$OPTARG
             ;;
-        t)
-            tags=$OPTARG
-            ;;
+        #t)
+         #   tags=$OPTARG
+          #  ;;
         *)
             echo "ERROR: Unknown parameter '$PARAM'"
             usage
@@ -117,7 +117,7 @@ if [ "$template_url" = "" ] && [ "$template_file" = "" ]; then
    exit 1
 fi
 
-echo "Updating stack [environment=$environment, region=$region, stack=$stack, stack_parameters=$stack_parameters, tags=$tags, template_file=$template_file, template_url=$template_url, assume_role_arn=$assume_role_arn]"
+echo "Updating stack [environment=$environment, region=$region, stack=$stack, stack_parameters=$stack_parameters, template_file=$template_file, template_url=$template_url, assume_role_arn=$assume_role_arn]"
 
 if [ "$assume_role_arn" != "" ];then
     credentials=$(aws sts assume-role --role-arn $assume_role_arn --role-session-name $stack --duration-seconds 3600 --query '[Credentials.AccessKeyId, Credentials.SecretAccessKey, Credentials.SessionToken]' --output text)
@@ -131,7 +131,7 @@ fi
 
 update_start_time=`date +"%Y-%m-%dT%H:%M:%S"`
 
-update_stack_cmd="aws --region $region --color on cloudformation update-stack --stack-name $stack --tags $tags --capabilities CAPABILITY_IAM"
+update_stack_cmd="aws --region $region --color on cloudformation update-stack --stack-name $stack --capabilities CAPABILITY_IAM"
 
 if [ "$template_url" != "" ];then
    update_stack_cmd="$update_stack_cmd --template-url $template_url"
