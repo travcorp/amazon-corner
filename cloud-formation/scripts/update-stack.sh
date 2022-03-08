@@ -115,7 +115,7 @@ if [ "$template_url" = "" ] && [ "$template_file" = "" ]; then
    exit 1
 fi
 
-echo "Updating stack [environment=$environment, region=$region, stack=$stack, stack_parameters=$stack_parameters, template_file=$template_file, template_url=$template_url, assume_role_arn=$assume_role_arn]"
+echo "Updating stack [environment=$environment, region=$region, stack=$stack, stack_parameters=$stack_parameters, tags=$tags, template_file=$template_file, template_url=$template_url, assume_role_arn=$assume_role_arn]"
 
 if [ "$assume_role_arn" != "" ];then
     credentials=$(aws sts assume-role --role-arn $assume_role_arn --role-session-name $stack --duration-seconds 3600 --query '[Credentials.AccessKeyId, Credentials.SecretAccessKey, Credentials.SessionToken]' --output text)
@@ -139,6 +139,10 @@ fi
 
 if [ "$stack_parameters" != "" ];then
    update_stack_cmd="$update_stack_cmd --parameters $stack_parameters"
+fi
+
+if [ "$tags" != "" ];then
+   update_stack_cmd="$update_stack_cmd --parameters $tags"
 fi
 
 #if [ "$assume_role_arn" != "" ];then
