@@ -4,9 +4,7 @@ set -exu
 echo $s3_key
 s3_key=$s3_key-$(uuidgen)
 echo $s3_key
-echo "hello world"
 stack_template_url=https://$s3_bucket_name.s3.amazonaws.com/$s3_key
-echo $stack_template_url
 echo Uploading template file: $stack_template --\> $stack_template_url
 aws s3api put-object --bucket $s3_bucket_name --key $s3_key --body $stack_template --region $region --profile $profile \
   || (>&2 echo FAILURE: Could not upload template to S3. See the error above! \
