@@ -24,7 +24,7 @@ else
 fi
 
 
-create_stack_cmd=aws cloudformation create-stack --stack-name $stack_name --template-url $stack_template_url --capabilities CAPABILITY_IAM --region $region --profile $profile --output text $params
+create_stack_cmd="aws cloudformation create-stack --stack-name $stack_name --template-url $stack_template_url --capabilities CAPABILITY_IAM --region $region --profile $profile --output text $params"
 
 if [ "$tags" != "" ];then
    create_stack_cmd="$create_stack_cmd --tags $tags"
