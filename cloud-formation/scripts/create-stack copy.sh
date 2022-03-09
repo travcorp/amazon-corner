@@ -1,13 +1,10 @@
 #!/bin/bash
 set -exu
 
-echo "hello world"
 echo $s3_key
 s3_key=$s3_key-$(uuidgen)
 echo $s3_key
-echo "hello world"
 stack_template_url=https://$s3_bucket_name.s3.amazonaws.com/$s3_key
-echo $stack_template_url
 echo Uploading template file: $stack_template --\> $stack_template_url
 aws s3api put-object --bucket $s3_bucket_name --key $s3_key --body $stack_template --region $region --profile $profile \
   || (>&2 echo FAILURE: Could not upload template to S3. See the error above! \
@@ -23,15 +20,8 @@ else
   echo Parameter file: $stack_parameters
 fi
 
-
-create_stack_cmd=aws cloudformation create-stack --stack-name $stack_name --template-url $stack_template_url --capabilities CAPABILITY_IAM --region $region --profile $profile --output text $params
-
-if [ "$tags" != "" ];then
-   create_stack_cmd="$create_stack_cmd --tags $tags"
-fi
-
 echo Creating stack $stack_name
-stack_id=$(create_stack_cmd) \
+stack_id=$(aws cloudformation create-stack --stack-name $stack_name --template-url $stack_template_url --capabilities CAPABILITY_IAM --region $region --profile $profile --output text $params --tags $tags) \
   || (>&2 echo FAILURE: Stack $stack_name failed to create. See the error above! \
 	 && exit 1) \
   || exit 1
